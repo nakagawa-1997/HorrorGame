@@ -1,7 +1,0 @@
-1回目　クリック
-アニメーションを流して、animationのIsClickフラグをtrueにする。
-if分で指定の位置までpositionが動いたら一時停止させる。　
-
-2回目　クリック
-アニメーションを進める＆animationのIsClickフラグをfalseにする。　
-1回目のクリックがされている状態かを記憶させる。bool。

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class IsGetItem : MonoBehaviour
 {
     //  Inspectorで指定したまとめてCanvasGroupのアルファ値を変更する
     [SerializeField] private CanvasGroup UI_Icon;
