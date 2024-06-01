@@ -25,8 +25,9 @@ public class ItemUseJug : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerItem playerItem;
-        playerItem = ItemController.GetComponent<ChengeItem>().GetItemActivMode();
+        //  tagを受け取る
+        string playerItem;
+        playerItem = ItemController.GetComponent<ChengeItem>().GetItemActiveTagName();
 
         //  使うキー（マウスの右クリック）が押されたかどうか
         if (Input.GetMouseButtonDown(1))    //  右クリック
@@ -36,16 +37,16 @@ public class ItemUseJug : MonoBehaviour
             //  アイテム別で動きを変化させる
             switch (playerItem)
             {
-                case PlayerItem.Free:
+                case "hand":
                     Debug.Log("アイテム：なし　右クリック");
 
                     break;
-                case PlayerItem.Key:
+                case "key":
 
                     Debug.Log("アイテム：カギ　右クリック");
                     //  鍵→目の前に鍵のかかった扉があるか判定　ある場合（その鍵が使える扉か判定後、扉をロック解除する）　ない場合（なにもないと表示）
                     break;
-                case PlayerItem.Light:
+                case "flashLight":
 
                     Debug.Log("アイテム：懐中電灯　右クリック");
                     //  懐中電灯→電気のON/OFF　
@@ -58,7 +59,7 @@ public class ItemUseJug : MonoBehaviour
                         flashLight.SetActive(true);
                     }
                     break;
-                case PlayerItem.Memo:
+                case "memo":
 
                     Debug.Log("アイテム：メモ　右クリック");
                     IsClick_Memo = true;

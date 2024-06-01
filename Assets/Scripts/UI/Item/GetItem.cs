@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class GetItem : MonoBehaviour
 {
-    [SerializeField] private Collider[] ItemAvailableColl;  //  取得可能 / 取得条件を満たすなオブジェクト
+    [SerializeField] private Collider[] ItemAvailableColl;  //  取得可能 / 取得条件を満たすオブジェクト
     [SerializeField] private float RayMaxDistance = 100.0f;
+
+    [SerializeField] GameObject ItemController;
 
     private void Start()
     {
+        //  gameobjectの中身を渡すぐ渡せるよう紐づけておく
+        ItemController = GameObject.Find("ItemController");
+
         for (int i = 0; i < ItemAvailableColl.Length; i++)
         {
             ItemAvailableColl[i].GetComponent<Collider>();
@@ -18,18 +23,49 @@ public class GetItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Ray ray = Camera.main.ScreenPointToRay(transform.position);
-        RaycastHit hit;
+        //  メインカメラの位置
+        Vector3 rayOriginPos = Camera.main.transform.position;
 
-        for (int i = 0;i < ItemAvailableColl.Length;i++)
+        //  Raycastを飛ばす方向(mainのカメラが向いている方向)
+        Vector3 rayDestPos= Camera.main.transform.forward;
+
+
+        //  マウスを左クリックした後にRayを飛ばす
+        if (Input.GetMouseButton(0))
         {
-            //  Rayの長さを決めて、決まった行動を取る？
-            if (ItemAvailableColl[i].Raycast(ray, out hit, RayMaxDistance))
+            //  Rayを作成
+            Ray ray = new Ray(rayOriginPos, rayDestPos);
+            //  Rayの衝突判定オブジェクト
+            RaycastHit hit;
+
+            for (int i = 0; i < ItemAvailableColl.Length; i++)
             {
-                transform.position = ray.GetPoint(RayMaxDistance);
-                Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
-                Debug.Log("RayIsGetCollider");
+                //  Rayの長さを決めて、決まった行動を取る？
+                if (ItemAvailableColl[i].Raycast(ray, out hit, RayMaxDistance))
+                {
+                    transform.position = ray.GetPoint(RayMaxDistance);
+
+                    //  オブジェクト別に行動を処理するのに『 hit.collider.tag == "○○" 』のように tag で判定することも可能
+                    if (hit.collider.tag == "red")
+                    {
+                        Debug.Log("赤色の箱を触った");
+
+                        GameObject item = Instantiate()
+                    }
+                    if (hit.collider.tag == "yellow")
+                    {
+                        Debug.Log("黄色の箱を触った");
+                    }
+                    if (hit.collider.tag == "blue")
+                    {
+                        Debug.Log("青色の箱を触った");
+                    }
+                }
             }
+
+            //  Rayを表示
+            Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
         }
+
     }
 }

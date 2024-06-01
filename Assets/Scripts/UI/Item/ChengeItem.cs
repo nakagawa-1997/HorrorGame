@@ -10,6 +10,7 @@ public class ChengeItem : MonoBehaviour
     [SerializeField] private GameObject ItemPos;
 
     [SerializeField] public GameObject[] ItemPrefab;
+    
 
     //  現在所持しているアイテム
     private int currentItem;
@@ -107,7 +108,7 @@ public class ChengeItem : MonoBehaviour
         }
 
     }
-
+    /*
     public PlayerItem GetItemActivMode()
     {
         PlayerItem itemName = PlayerItem.Free;
@@ -124,5 +125,22 @@ public class ChengeItem : MonoBehaviour
         }
 
         return itemName;
+    }
+    */
+
+    public string GetItemActiveTagName()
+    {
+        string itemTagName = "hand";
+
+        for (int i = 0; i < ItemPrefab.Length; i++)
+        {
+            if (i == currentItem)
+            {
+                //  int型をenum型に変更するための作業
+                itemTagName = ItemPrefab[i].tag;
+            }
+        }
+
+        return itemTagName;
     }
 }

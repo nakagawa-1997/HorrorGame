@@ -13,6 +13,11 @@ public class InputController : MonoBehaviour
     private Vector3 StartCameraRotation = Vector3.zero;     //  カメラの最初の角度
     private Vector3 CurrentCameraRotation = Vector3.zero;     //  カメラの現在の角度
 
+    private void Update()
+    {
+        MouseCursorFormat();
+    }
+
 
     //  現在のマウスの位置を更新するメソッド
     public void Get_CurrentMousePosition_Update()
@@ -50,6 +55,12 @@ public class InputController : MonoBehaviour
         return transform.rotation;
     }
 
+    //  マウスカーソルの位置を初期化する
+    private void MouseCursorFormat()
+    {
+        Cursor.lockState = CursorLockMode.None; //マウスカーソルの設定を初期化して、
+        Cursor.visible = true; //マウスカーソルを表示する
+    }
 
     //  ボタン(キーボード)が押されたら
 

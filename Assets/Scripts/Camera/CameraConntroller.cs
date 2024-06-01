@@ -8,13 +8,13 @@ public class CameraConntroller : MonoBehaviour
     [SerializeField] private float CameraHeight_Y = 0.5f;
     //  回転速度
     [SerializeField] private float Y_RotationSpeed = 500f;
-    [SerializeField] private float MaxRotateLimit = 60;
-    private float MinRotateLimit;
+    [SerializeField] private float MaxRotateLimit;
+    [SerializeField] private float MinRotateLimit;
 
     //private Vector3 Camera_PlayerDistance = new Vector3(-0.2f, 2f, -0f);        //  カメラとプレイヤーの距離
     private Vector3 Camera_PlayerDistance = new Vector3(-0.2f, 2f, -7f);
 
-    bool MoveMouseFlag;                 //  マウスが動いたかどうかのフラグ
+    //bool MoveMouseFlag;                 //  マウスが動いたかどうかのフラグ
 
     //  入力コントローラー
     GameObject InputController;
@@ -32,13 +32,11 @@ public class CameraConntroller : MonoBehaviour
         InputController.GetComponent<InputController>().Get_StartMousePosition_Update();
         
         //  マウスの移動フラグをfalseにする
-        MoveMouseFlag = false;
+        //MoveMouseFlag = false;
 
 
         Vector3 playerPosition = Player.GetComponent<Player>().GetPlayerPosition();
         Camera.main.transform.position = playerPosition;
-
-        MinRotateLimit = 360 - MaxRotateLimit;
     }
 
     // Update is called once per frame
