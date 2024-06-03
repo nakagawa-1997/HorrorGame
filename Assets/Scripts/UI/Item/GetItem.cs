@@ -50,7 +50,7 @@ public class GetItem : MonoBehaviour
                     {
                         Debug.Log("ÔF‚Ì” ‚ğG‚Á‚½");
 
-                        GameObject item = Instantiate()
+                        //GameObject item = Instantiate()
                     }
                     if (hit.collider.tag == "yellow")
                     {
