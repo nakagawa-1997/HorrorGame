@@ -42,7 +42,6 @@ public class ChengeItem : MonoBehaviour
                 ItemPrefab[i].SetActive(false);
             }
         }
-
     }
 
     // Update is called once per frame

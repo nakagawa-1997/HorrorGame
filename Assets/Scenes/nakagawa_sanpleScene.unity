@@ -453,7 +453,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1383384952}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &255137290
+--- !u!1 &373137777
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -461,33 +461,29 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 255137291}
-  m_Layer: 5
+  - component: {fileID: 373137778}
+  m_Layer: 0
   m_Name: Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &255137291
-RectTransform:
+--- !u!4 &373137778
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 255137290}
-  m_LocalRotation: {x: 0.043619405, y: -0, z: -0, w: 0.9990483}
-  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_GameObject: {fileID: 373137777}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.3, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1586762553}
-  m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.3, y: -0.2}
-  m_SizeDelta: {x: 862.8, y: 309.59998}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &452763879
 GameObject:
   m_ObjectHideFlags: 0
@@ -1447,7 +1443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65db4d097016839448225768fd832cba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemPos: {fileID: 255137290}
+  ItemPos: {fileID: 0}
   ItemPrefab:
   - {fileID: 3626352746524432184, guid: 69ed6e4826a02df438094e92978aec40, type: 3}
   - {fileID: 3402300917132263314, guid: 2a68b3c080c1bb54ca0e4ca8a6e15890, type: 3}
@@ -1517,6 +1513,10 @@ MonoBehaviour:
   - {fileID: 879267146}
   - {fileID: 154905454}
   RayMaxDistance: 5
+  ItemController: {fileID: 1231952880}
+  ItemParent: {fileID: 373137777}
+  ItemPrefab:
+  - {fileID: 5473567498405262218, guid: cddd7e9fdad1b694eae7b5fc89320a77, type: 3}
 --- !u!1 &1383384951
 GameObject:
   m_ObjectHideFlags: 0
@@ -1666,7 +1666,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 255137291}
+  - {fileID: 373137778}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!81 &1586762554

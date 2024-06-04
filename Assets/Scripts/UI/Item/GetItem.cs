@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class GetItem : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class GetItem : MonoBehaviour
     [SerializeField] private float RayMaxDistance = 100.0f;
 
     [SerializeField] GameObject ItemController;
+
+    [SerializeField] GameObject ItemParent;
+    [SerializeField] GameObject[] ItemPrefab;
 
     private void Start()
     {
@@ -50,7 +54,15 @@ public class GetItem : MonoBehaviour
                     {
                         Debug.Log("赤色の箱を触った");
 
-                        //GameObject item = Instantiate()
+                        //  アイテムのタグで生産するアイテムを判別する
+                        for (int j = 0; j < ItemPrefab.Length; j++)
+                        {
+                            if (ItemPrefab[j].tag == "key")
+                            {
+                                //  アイテム生産（生産場所をUIカメラの子オブジェクトに？する？）
+                                ItemProduction(ItemPrefab[j]);
+                            }
+                        }
                     }
                     if (hit.collider.tag == "yellow")
                     {
@@ -68,4 +80,15 @@ public class GetItem : MonoBehaviour
         }
 
     }
+
+    //  アイテム取得後の動き
+    void ItemProduction(GameObject Prefab)
+    {
+        //  親オブジェクト（生産する位置）の設定
+        var parent = ItemParent.transform;
+
+        //  配列で設定したアイテムを生産する
+        Instantiate(Prefab, Vector3.zero, Quaternion.identity, parent);
+    }
+
 }
