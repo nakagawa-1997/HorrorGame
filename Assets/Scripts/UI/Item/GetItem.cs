@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
+//using static UnityEditor.Progress;
 
 public class GetItem : MonoBehaviour
 {
@@ -84,11 +84,11 @@ public class GetItem : MonoBehaviour
     //  アイテム取得後の動き
     void ItemProduction(GameObject Prefab)
     {
-        //  親オブジェクト（生産する位置）の設定
-        var parent = ItemParent.transform;
-
         //  配列で設定したアイテムを生産する
-        Instantiate(Prefab, Vector3.zero, Quaternion.identity, parent);
+        GameObject item = Instantiate(Prefab, ItemParent.transform.position, Quaternion.identity);
+
+        //  親オブジェクトの指定？
+        item.transform.parent = ItemParent.transform;
     }
 
 }
