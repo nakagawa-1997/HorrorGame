@@ -1,4 +1,4 @@
-using System.Collections;
+//using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 //using static UnityEditor.Progress;
@@ -13,6 +13,9 @@ public class GetItem : MonoBehaviour
     [SerializeField] GameObject ItemParent;
     [SerializeField] GameObject[] ItemPrefab;
 
+    private bool[] itemExists;
+    private GameObject[] ObtainedItem;
+
     private void Start()
     {
         //  gameobjectの中身を渡すぐ渡せるよう紐づけておく
@@ -21,6 +24,14 @@ public class GetItem : MonoBehaviour
         for (int i = 0; i < ItemAvailableColl.Length; i++)
         {
             ItemAvailableColl[i].GetComponent<Collider>();
+        }
+
+
+        //  生産するアイテム配列の長さを渡す
+        itemExists = new bool[ItemPrefab.Length];
+        for (int i = 0;i < ItemPrefab.Length;i++)
+        {
+            itemExists[i] = false;
         }
     }
 
@@ -55,22 +66,21 @@ public class GetItem : MonoBehaviour
                         Debug.Log("赤色の箱を触った");
 
                         //  アイテムのタグで生産するアイテムを判別する
-                        for (int j = 0; j < ItemPrefab.Length; j++)
-                        {
-                            if (ItemPrefab[j].tag == "key")
-                            {
-                                //  アイテム生産（生産場所をUIカメラの子オブジェクトに？する？）
-                                ItemProduction(ItemPrefab[j]);
-                            }
-                        }
+                        ProcessByItem("key");
                     }
                     if (hit.collider.tag == "yellow")
                     {
                         Debug.Log("黄色の箱を触った");
+
+                        //  アイテムのタグで生産するアイテムを判別する
+                        ProcessByItem("memo");
                     }
                     if (hit.collider.tag == "blue")
                     {
                         Debug.Log("青色の箱を触った");
+
+                        //  アイテムのタグで生産するアイテムを判別する
+                        ProcessByItem("flashLight");
                     }
                 }
             }
@@ -81,7 +91,7 @@ public class GetItem : MonoBehaviour
 
     }
 
-    //  アイテム取得後の動き
+    //  アイテム取得後の動き(生産のみ)
     void ItemProduction(GameObject Prefab)
     {
         //  配列で設定したアイテムを生産する
@@ -91,4 +101,30 @@ public class GetItem : MonoBehaviour
         item.transform.parent = ItemParent.transform;
     }
 
+    //  アイテム取得後の動き(全部)
+    void ProcessByItem(string PrefabTagName)
+    {
+        //  アイテムのタグで生産するアイテムを判別する
+        for (int j = 0; j < ItemPrefab.Length; j++)
+        {
+            if (itemExists[j] == false)
+            {
+                if (ItemPrefab[j].tag == PrefabTagName)
+                {
+                    //  アイテム生産（生産場所をUIカメラの子オブジェクトにする？）
+                    ItemProduction(ItemPrefab[j]);
+                    itemExists[j] = true;
+                    Debug.Log(PrefabTagName + "が生産されました");
+                }
+                else
+                {
+                    Debug.Log(PrefabTagName + "というタグ名は見つかりません");
+                }
+            }
+            else
+            {
+                Debug.Log(PrefabTagName + "は既に生産されています");
+            }
+        }
+    }
 }

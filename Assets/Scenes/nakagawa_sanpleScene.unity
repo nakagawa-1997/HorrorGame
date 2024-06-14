@@ -609,7 +609,7 @@ GameObject:
   - component: {fileID: 667116107}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1518,7 +1518,7 @@ MonoBehaviour:
   ItemPrefab:
   - {fileID: 3626352746524432184, guid: 69ed6e4826a02df438094e92978aec40, type: 3}
   - {fileID: 5473567498405262218, guid: cddd7e9fdad1b694eae7b5fc89320a77, type: 3}
-  - {fileID: 100000, guid: 7c4cfd35d7e78fb44a0f5522e37c35b1, type: 3}
+  - {fileID: 3402300917132263314, guid: 2a68b3c080c1bb54ca0e4ca8a6e15890, type: 3}
   - {fileID: 3652343707960246690, guid: 34eac20371f7c3341bdf093def23210d, type: 3}
 --- !u!1 &1383384951
 GameObject:
