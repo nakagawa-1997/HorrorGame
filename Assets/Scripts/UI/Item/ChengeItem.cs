@@ -10,6 +10,10 @@ public class ChengeItem : MonoBehaviour
     [SerializeField] private GameObject ItemPos;
 
     [SerializeField] public GameObject[] ItemPrefab;
+
+    //  取得したアイテムのタグ名を入れる
+    private string[] itemTag;
+    private int count;
     
 
     //  現在所持しているアイテム
@@ -42,6 +46,10 @@ public class ChengeItem : MonoBehaviour
                 ItemPrefab[i].SetActive(false);
             }
         }
+
+        //  ホイールの配列宣言
+        itemTag = new string[ItemPrefab.Length];
+        itemTag[0] = "hand";
     }
 
     // Update is called once per frame
@@ -141,5 +149,17 @@ public class ChengeItem : MonoBehaviour
         }
 
         return itemTagName;
+    }
+
+    //  アイテムのタグを渡す
+    public void ItemTag(string tagName)
+    {
+        for (int i = 0; i < itemTag.Length; i++)
+        {
+            if (itemTag[i]==null)
+            {
+                itemTag[i] = tagName;
+            }
+        }
     }
 }
