@@ -8,7 +8,9 @@ public class GetItem : MonoBehaviour
     [SerializeField] private Collider[] ItemAvailableColl;  //  取得可能 / 取得条件を満たすオブジェクト
     [SerializeField] private float RayMaxDistance = 100.0f;
 
+    //  ゲームオブジェクトに付けたスクリプト読み込み用
     [SerializeField] GameObject ItemController;
+    [SerializeField] GameObject ChengeItem;
 
     [SerializeField] GameObject ItemParent;
     [SerializeField] GameObject[] ItemPrefab;
@@ -20,6 +22,7 @@ public class GetItem : MonoBehaviour
     {
         //  gameobjectの中身を渡すぐ渡せるよう紐づけておく
         ItemController = GameObject.Find("ItemController");
+        ChengeItem = GameObject.Find("");
 
         for (int i = 0; i < ItemAvailableColl.Length; i++)
         {
@@ -29,7 +32,7 @@ public class GetItem : MonoBehaviour
 
         //  生産するアイテム配列の長さを渡す
         itemExists = new bool[ItemPrefab.Length];
-        for (int i = 0;i < ItemPrefab.Length;i++)
+        for (int i = 0; i < ItemPrefab.Length; i++)
         {
             itemExists[i] = false;
         }
@@ -42,7 +45,7 @@ public class GetItem : MonoBehaviour
         Vector3 rayOriginPos = Camera.main.transform.position;
 
         //  Raycastを飛ばす方向(mainのカメラが向いている方向)
-        Vector3 rayDestPos= Camera.main.transform.forward;
+        Vector3 rayDestPos = Camera.main.transform.forward;
 
 
         //  マウスを左クリックした後にRayを飛ばす
@@ -113,6 +116,7 @@ public class GetItem : MonoBehaviour
                 {
                     //  アイテム生産（生産場所をUIカメラの子オブジェクトにする？）
                     ItemProduction(ItemPrefab[j]);
+
                     itemExists[j] = true;
                     Debug.Log(PrefabTagName + "が生産されました");
                 }

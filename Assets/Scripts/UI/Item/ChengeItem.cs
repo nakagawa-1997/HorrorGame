@@ -34,22 +34,7 @@ public class ChengeItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentItem = 0;
-        for (int i = 0; i < ItemPrefab.Length; i++)
-        {
-            if (i == currentItem)
-            {
-                ItemPrefab[i].SetActive(true);
-            }
-            else
-            {
-                ItemPrefab[i].SetActive(false);
-            }
-        }
 
-        //  ホイールの配列宣言
-        itemTag = new string[ItemPrefab.Length];
-        itemTag[0] = "hand";
     }
 
     // Update is called once per frame
@@ -162,4 +147,26 @@ public class ChengeItem : MonoBehaviour
             }
         }
     }
+
+    //  タグ配列の初期化
+    public void ItemChengeInit(int ItemMaxNum)
+    {
+        currentItem = 0;
+        for (int i = 0; i < ItemMaxNum; i++)
+        {
+            if (i == currentItem)
+            {
+                ItemPrefab[i].SetActive(true);
+            }
+            else
+            {
+                ItemPrefab[i].SetActive(false);
+            }
+        }
+
+        //  ホイールの配列宣言
+        itemTag = new string[ItemPrefab.Length];
+        itemTag[0] = "hand";
+    }
+
 }
