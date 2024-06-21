@@ -8,12 +8,14 @@ using static ChengeItem;
 public class ChengeItem : MonoBehaviour
 {
     [SerializeField] private GameObject ItemPos;
+    [SerializeField] private GameObject ItemInfo;
 
-    [SerializeField] public GameObject[] ItemPrefab;
+    int ItemPrefabLength;
 
     //  取得したアイテムのタグ名を入れる
     private string[] itemTag;
     private int count;
+    private GameObject[] tagObjs;
     
 
     //  現在所持しているアイテム
@@ -34,7 +36,14 @@ public class ChengeItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //  すぐ呼び出せるように場所を見つけておく
+        ItemInfo = GameObject.Find("ItemInfo");
 
+        //  アイテム配列の長さを渡しておく
+        ItemPrefabLength = ItemInfo.GetComponent<ItemPrefabInfo>().Get_ItemMaxNum();
+
+        itemTag = new string[ItemPrefabLength];
+        tagObjs = new GameObject[ItemPrefabLength];
     }
 
     // Update is called once per frame
@@ -64,42 +73,47 @@ public class ChengeItem : MonoBehaviour
     {
         if (wheel > 0)
         {
-            currentItem = (currentItem + 1) % ItemPrefab.Length;
+            currentItem = (currentItem + 1) % ItemPrefabLength;
 
-            for (int i = 0; i < ItemPrefab.Length; i++)
+            for (int i = 0; i < ItemPrefabLength; i++)
             {
                 if (i == currentItem)
                 {
-                    ItemPrefab[i].SetActive(true);
+                    //  オブジェクトの表示
+                    tagObjs[i].SetActive(true);
                 }
                 else
                 {
-                    ItemPrefab[i].SetActive(false);
+                    //  オブジェクトを非表示
+                    tagObjs[i].SetActive(false);
                 }
             }
         }
         else if (wheel < 0)
         {
-            currentItem = (currentItem - 1) % ItemPrefab.Length;
+            currentItem = (currentItem - 1) % ItemPrefabLength;
             if (currentItem < 0)
             {
                 currentItem = 3;
             }
 
-            for (int i = 0; i < ItemPrefab.Length; i++)
+            for (int i = 0; i < ItemPrefabLength; i++)
             {
                 if (i == currentItem)
                 {
-                    ItemPrefab[i].SetActive(true);
+                    //  オブジェクトを表示
+                    tagObjs[i].SetActive(true);
                 }
                 else
                 {
-                    ItemPrefab[i].SetActive(false);
+                    //  オブジェクトを非表示
+                    tagObjs[i].SetActive(false);
                 }
             }
         }
 
     }
+
     /*
     public PlayerItem GetItemActivMode()
     {
@@ -124,12 +138,12 @@ public class ChengeItem : MonoBehaviour
     {
         string itemTagName = "hand";
 
-        for (int i = 0; i < ItemPrefab.Length; i++)
+        for (int i = 0; i < ItemPrefabLength; i++)
         {
             if (i == currentItem)
             {
                 //  int型をenum型に変更するための作業
-                itemTagName = ItemPrefab[i].tag;
+                itemTagName = ItemInfo.GetComponent<ItemPrefabInfo>().Get_ItemTag(i);
             }
         }
 
@@ -144,6 +158,8 @@ public class ChengeItem : MonoBehaviour
             if (itemTag[i]==null)
             {
                 itemTag[i] = tagName;
+                //  tagでGameObjectを見つける
+                tagObjs[i]=GameObject.Find(tagName);
             }
         }
     }
@@ -156,16 +172,18 @@ public class ChengeItem : MonoBehaviour
         {
             if (i == currentItem)
             {
-                ItemPrefab[i].SetActive(true);
+                //ItemInfo.GetComponent<ItemPrefabInfo>().Object_SetActiveTrue(i);
+                tagObjs[i].SetActive(true);
             }
             else
             {
-                ItemPrefab[i].SetActive(false);
+                //ItemInfo.GetComponent<ItemPrefabInfo>().Object_SetActiveFalse(i);
+                tagObjs[i].SetActive(false);
             }
         }
 
         //  ホイールの配列宣言
-        itemTag = new string[ItemPrefab.Length];
+        itemTag = new string[ItemPrefabLength];
         itemTag[0] = "hand";
     }
 

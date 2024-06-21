@@ -10,10 +10,9 @@ public class GetItem : MonoBehaviour
 
     //  ゲームオブジェクトに付けたスクリプト読み込み用
     [SerializeField] GameObject ItemController;
-    [SerializeField] GameObject ChengeItem;
+    [SerializeField] private GameObject ItemInfo;
 
     [SerializeField] GameObject ItemParent;
-    [SerializeField] GameObject[] ItemPrefab;
 
     private bool[] itemExists;
     private GameObject[] ObtainedItem;
@@ -22,7 +21,7 @@ public class GetItem : MonoBehaviour
     {
         //  gameobjectの中身を渡すぐ渡せるよう紐づけておく
         ItemController = GameObject.Find("ItemController");
-        ChengeItem = GameObject.Find("");
+        ItemInfo = GameObject.Find("ItemInfo");
 
         for (int i = 0; i < ItemAvailableColl.Length; i++)
         {
@@ -31,11 +30,15 @@ public class GetItem : MonoBehaviour
 
 
         //  生産するアイテム配列の長さを渡す
-        itemExists = new bool[ItemPrefab.Length];
-        for (int i = 0; i < ItemPrefab.Length; i++)
+        itemExists = new bool[ItemInfo.GetComponent<ItemPrefabInfo>().Get_ItemMaxNum()];
+
+        for (int i = 0; i < itemExists.Length; i++)
         {
             itemExists[i] = false;
         }
+
+        //  何も持っていないアイテムの状態を生産する
+        ProcessByItem("hand");
     }
 
     // Update is called once per frame
@@ -108,14 +111,14 @@ public class GetItem : MonoBehaviour
     void ProcessByItem(string PrefabTagName)
     {
         //  アイテムのタグで生産するアイテムを判別する
-        for (int j = 0; j < ItemPrefab.Length; j++)
+        for (int j = 0; j < itemExists.Length; j++)
         {
             if (itemExists[j] == false)
             {
-                if (ItemPrefab[j].tag == PrefabTagName)
+                if (ItemInfo.GetComponent<ItemPrefabInfo>().Get_ItemTag(j) == PrefabTagName)
                 {
                     //  アイテム生産（生産場所をUIカメラの子オブジェクトにする？）
-                    ItemProduction(ItemPrefab[j]);
+                    ItemProduction(ItemInfo.GetComponent<ItemPrefabInfo>().Get_Prefab(j));
 
                     itemExists[j] = true;
                     Debug.Log(PrefabTagName + "が生産されました");
